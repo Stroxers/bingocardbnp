@@ -1,0 +1,28 @@
+import random
+
+def generate_bingo_card():
+    # Generate a random number of unique numbers between 1 and 50
+    num_numbers = 24  # 25 total cells (5x5) - 1 (for "BNP")
+    numbers = random.sample(range(1, 51), num_numbers)
+    
+    # Place "BNP" in the middle of the Bingo card
+    middle_index = 12
+    numbers.insert(middle_index, "BNP")
+    
+    # Create a 5x5 Bingo card with the generated numbers
+    bingo_card = [numbers[i:i+5] for i in range(0, len(numbers), 5)]
+    
+    return bingo_card
+
+def print_bingo_card(card):
+    print(" B   |  I   |  N   |  G   |  O   ")
+    print("---------------------------------")
+    for row in card:
+        print("|", " | ".join(map(lambda x: str(x).center(3) if str(x) != "BNP" else "BNP", row)), "|")
+        print("---------------------------------")
+
+if __name__ == "__main__":
+    # Generate and print a Bingo card
+    bingo_card = generate_bingo_card()
+    print("Generated Bingo Card:")
+    print_bingo_card(bingo_card)
